@@ -1,7 +1,18 @@
 # cse-challenge
+This repository contains my script submission for [cse-challenge](https://github.com/KualiCo/cse-challenge).
 
+### Install
+      cd cse-challenge
+      npm install -g .
+      
+### Uninstall
+      npm uninstall -g cse-challenge
+      
+### Usage
+      cse-challenge --help
+      cse-challenge -t <token>
 
-## Submission (as per [cse-challenge](https://github.com/KualiCo/cse-challenge))
+## Submission Requirements
 - Create a GitHub repo and send along the link
 - Commit your work as you work documenting each commit
 - Make sure not to commit the API key you've been given
@@ -50,3 +61,4 @@
 1. [Kuali Developer Documentation](https://developers.kuali.co/)
 1. [csv-parser](https://www.npmjs.com/package/csv-parser) npm documentation
 1. [axios](https://www.npmjs.com/package/axios) npm documentation
+1. [yargs](https://www.npmjs.com/package/yargs) npm documentation
