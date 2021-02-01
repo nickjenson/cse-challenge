@@ -5,6 +5,10 @@ const axios = require('axios');
 axios.defaults.baseURL = 'https://stucse.kuali.co/';
 axios.defaults.headers.common['Authorization'] = `Bearer ${process.env.TOKEN}`;
 
+/**
+ * getAllData (and getData) function(s) fetch contextual information we need
+ * and stores them in a data object
+ */
 const getAllData = async () => {
     try {
         const data = {};
@@ -22,6 +26,10 @@ const getData = async url => {
     return response.data;
 };
 
+/**
+ * buildPayload takes the csv row information and combines it with the contextual
+ * information we've fetched from getAllData to handle the payload logic 
+ */
 const buildPayload = (row, data) => {
     const creditType = row.creditType,
         min = row.creditsMin,
@@ -86,7 +94,13 @@ const postData = async payload => {
     // console.log(response.data);
 };
 
-(async () => {
+/**
+ * starts the script by:
+ * 1. fetching contextual data
+ * 2. reading csv
+ * 3. passing data & row information through buildPayload
+ */
+(async () => { 
     const data = await getAllData();
     fs.createReadStream('data/courses.csv')
         .pipe(csv())
