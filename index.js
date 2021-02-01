@@ -1,11 +1,23 @@
-const fs = require('fs')
+const fs = require('fs');
 const csv = require('csv-parser');
 const axios = require('axios');
 
 axios.defaults.baseURL = 'https://stucse.kuali.co/';
 axios.defaults.headers.common['Authorization'] = `Bearer ${process.env.TOKEN}`;
 
-const name = 'Nick Jenson';
+
+(async () => {
+    const data = await getAllData();
+    fs.createReadStream('data/courses.csv')
+        .pipe(csv())
+        .on('data', row => {
+            postData(row, data);
+        })
+        .on('end', () => {
+            console.log('complete');
+        });
+})();
+
 const getAllData = async () => {
     try {
         let data = [];
@@ -22,18 +34,6 @@ const getData = async url => {
     const response = await axios.get(url);
     return response.data;
 };
-
-const readCSV = async () => {
-    const data = await getAllData();
-    fs.createReadStream('data/courses.csv')
-        .pipe(csv())
-        .on('data', row => {
-            postData(row, data);
-        })
-        .on('end', () => {
-            console.log('complete')
-        })
-}
 
 const postData = (row, data) => {
     let creditType = row.creditType;
@@ -90,7 +90,7 @@ const postData = (row, data) => {
         groupFilter1: data.groups.find(x => x.name === row.department)?.id ?? '',
         groupFilter2: data.groups.find(x => x.name === row.department)?.parentId ?? '',
         campus: { ...campus },
-        notes: `Submitted by ${name}`,
+        notes: 'Submitted by Nick Jenson'
     };
     console.log(postData)
 }
