@@ -7,7 +7,7 @@ axios.defaults.headers.common['Authorization'] = `Bearer ${process.env.TOKEN}`;
 
 const getAllData = async () => {
     try {
-        let data = [];
+        const data = {};
         data.subjectcodes = await getData('/api/cm/options/types/subjectcodes');
         data.campuses = await getData('/api/cm/options/types/campuses');
         data.groups = await getData('/api/v1/groups');
@@ -22,7 +22,7 @@ const getData = async url => {
     return response.data;
 };
 
-const postData = (row, data) => {
+const buildPayload = (row, data) => {
     const creditType = row.creditType,
         min = row.creditsMin,
         max = row.creditsMax,
@@ -34,15 +34,15 @@ const postData = (row, data) => {
 
     const campus = {};
     campuses.forEach(location => {
-        let locationId = data.campuses.find(x => x.name === location).id;
+        let locationId = data.campuses.find(c => c.name === location).id;
         campus[locationId] = true;
     });
 
-    let date = {
+    const date = {
         winter: '01-01',
         spring: '04-03',
         summer: '07-04',
-        fall: '10-04',
+        fall: '10-04'
     };
 
     switch (creditType) {
@@ -61,32 +61,37 @@ const postData = (row, data) => {
             value = min;
     }
 
-    let postData = {
+    const payload = {
         subjectCode: data.subjectcodes.find(x => x.name === row.subjectCode).id ?? '',
         number: row.number,
         title: row.title,
         credits: {
             chosen: creditType,
             credits: creditDetails,
-            value: value,
+            value: value
         },
         status: 'draft',
         dateStart: `${year}-${date[season]}`,
-        groupFilter1: data.groups.find(x => x.name === row.department)?.id ?? '',
-        groupFilter2: data.groups.find(x => x.name === row.department)?.parentId ?? '',
+        groupFilter1: data.groups.find(y => y.name === row.department)?.id ?? '',
+        groupFilter2: data.groups.find(z => z.name === row.department)?.parentId ?? '',
         campus: { ...campus },
-        notes: 'Submitted by Nick Jenson',
+        notes: 'Submitted by Nick Jenson'
     };
-    console.log(postData);
+    postData(payload);
 };
 
+const postData = async payload => {
+    console.log(payload);
+    // const response = await axios.post('', payload);
+    // console.log(response.data);
+};
 
 (async () => {
     const data = await getAllData();
     fs.createReadStream('data/courses.csv')
         .pipe(csv())
         .on('data', row => {
-            postData(row, data);
+            buildPayload(row, data);
         })
         .on('end', () => {
             console.log('complete');
