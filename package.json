@@ -1,13 +1,13 @@
 {
   "name": "cse-challenge",
   "version": "1.0.0",
-  "description": "",
+  "description": "Script for CSE challenge",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Nick Jenson",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.21.1",
