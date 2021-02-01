@@ -98,9 +98,8 @@ const buildPayload = (row, data) => {
 };
 
 const postData = async payload => {
-    console.log(payload);
-    // const response = await axios.post('', payload);
-    // console.log(response.data);
+    const response = await axios.post('', payload);
+    console.log(response.data);
 };
 
 /**
