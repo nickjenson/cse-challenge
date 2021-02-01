@@ -1,5 +1,6 @@
 # cse-challenge
 
+
 ## Submission (as per [cse-challenge](https://github.com/KualiCo/cse-challenge))
 - Create a GitHub repo and send along the link
 - Commit your work as you work documenting each commit
@@ -34,8 +35,18 @@
 ## Approach and Notes
 1. Read data from the provided CSV
 1. There are several pieces of information we will need to retrieve:
-    1. `subjectCode` - identifier of the subject 
-        1. (ex. ACCT is 6012dd6a016ce30026cbd08d) @ `/api/cm/options/types/subjectcodes`
-    1. `groupFilter1` and `groupFilter2` - identifier and parent identifier for the respective group
-    1. `campus` - identifier for the campus 
-        1. (ex. North is 6012ddf35a84800027c335e3) @ `/api/cm/options/types/campuses`
+    1. `subjectCode`: subject identifier (ex. ACCT is 6012dd6a016ce30026cbd08d)
+    1. `groupFilter1` and `groupFilter2`: group identifier and parent group identifier
+    1. `campus`: campus identifier (ex. North is 6012ddf35a84800027c335e3)
+1. Additional logic that will require careful consideration:
+    1. `creditType` can change the values and format of the data for `credits` and `value`
+    1. `dateStart` is based of off Winter, Spring, Summer, and Fall terms _and_ `YYYY-MM-DD` format (ex. Fall 2021 needs to be 2021-10-04)
+1. Static fields:
+    1. status: `draft`
+    2. notes: `Submitted by Nick Jenson`
+
+## Resources
+1. [cse-challenge](https://github.com/KualiCo/cse-challenge) repository
+1. [Kuali Developer Documentation](https://developers.kuali.co/)
+1. [csv-parser](https://www.npmjs.com/package/csv-parser) npm documentation
+1. [axios](https://www.npmjs.com/package/axios) npm documentation
