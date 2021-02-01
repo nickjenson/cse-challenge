@@ -9,8 +9,12 @@
   "keywords": [],
   "author": "Nick Jenson",
   "license": "ISC",
+  "bin": {
+    "cse-challenge": "./bin/index.js"
+  },
   "dependencies": {
     "axios": "^0.21.1",
-    "csv-parser": "^3.0.0"
+    "csv-parser": "^3.0.0",
+    "yargs": "^16.2.0"
   }
 }
