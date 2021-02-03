@@ -2,14 +2,18 @@
 
 const fs = require('fs');
 const csv = require('csv-parser');
-const yargs = require("yargs");
+const yargs = require('yargs');
 const axios = require('axios');
 
 const options = yargs
- .usage("Usage: -t <token>")
- .option("t", { alias: "token", describe: "your token", type: "string", demandOption: true })
- .help()
- .argv;
+    .usage('Usage: -t <token>')
+    .option('t', { 
+        alias: 'token', 
+        describe: 'your token', 
+        type: 'string', 
+        demandOption: true 
+    })
+    .help().argv;
 
 axios.defaults.baseURL = 'https://stucse.kuali.co/';
 axios.defaults.headers.common['Authorization'] = `Bearer ${options.token}`;
@@ -108,7 +112,7 @@ const postData = async payload => {
  * 2. reading csv
  * 3. passing data & row information through buildPayload
  */
-(async () => { 
+(async () => {
     const data = await getAllData();
     fs.createReadStream('data/courses.csv')
         .pipe(csv())
