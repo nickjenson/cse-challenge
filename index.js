@@ -4,7 +4,7 @@ const axios = require('axios')
 const csv = require('csv-parser')
 
 const options = yargs
-    .usage('Usage: -t <token>')
+    .usage('Usage: -- -t <token>')
     .option('t', { 
         alias: 'token', 
         describe: 'your token', 
@@ -78,7 +78,7 @@ const buildPayload = (row, data) => {
         default:
             creditDetails = { min: min, max: min };
             value = min;
-    }
+    };
 
     const payload = {
         subjectCode: data.subjectcodes.find(x => x.name === row.subjectCode)?.id,
@@ -102,8 +102,8 @@ const buildPayload = (row, data) => {
           delete payload[key];
         }
     });
-    // postData(payload);
-    console.log(payload);
+    // console.log(payload);
+    postData(payload);
 };
 
 const postData = async payload => {
