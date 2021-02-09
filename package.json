@@ -4,14 +4,11 @@
   "description": "Script for CSE challenge",
   "main": "index.js",
   "scripts": {
-    "start": "node bin/index.js"
+    "start": "node index.js"
   },
   "keywords": [],
   "author": "Nick Jenson",
   "license": "ISC",
-  "bin": {
-    "cse-challenge": "./bin/index.js"
-  },
   "dependencies": {
     "axios": "^0.21.1",
     "csv-parser": "^3.0.0",
