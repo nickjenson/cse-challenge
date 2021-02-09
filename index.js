@@ -81,7 +81,7 @@ const buildPayload = (row, data) => {
     }
 
     const payload = {
-        subjectCode: data.subjectcodes.find(x => x.name === row.subjectCode).id ?? '',
+        subjectCode: data.subjectcodes.find(x => x.name === row.subjectCode)?.id,
         number: row.number,
         title: row.title,
         credits: {
@@ -91,15 +91,23 @@ const buildPayload = (row, data) => {
         },
         status: 'draft',
         dateStart: `${year}-${date[season]}`,
-        groupFilter1: data.groups.find(y => y.name === row.department)?.id ?? '',
-        groupFilter2: data.groups.find(z => z.name === row.department)?.parentId ?? '',
+        groupFilter1: data.groups.find(y => y.name === row.department)?.id,
+        groupFilter2: data.groups.find(z => z.name === row.department)?.parentId,
         campus: { ...campus },
         notes: 'Submitted by Nick Jenson'
     };
-    postData(payload);
+    // remove keys which value return undefined
+    Object.keys(payload).forEach(key => {
+        if (payload[key] === undefined) {
+          delete payload[key];
+        }
+    });
+    // postData(payload);
+    console.log(payload);
 };
 
 const postData = async payload => {
+
     const response = await axios.post('/api/cm/courses', payload);
     console.log(response.data);
 };
