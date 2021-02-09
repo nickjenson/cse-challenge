@@ -1,9 +1,7 @@
-#!/usr/bin/env node
-
-const fs = require('fs');
-const csv = require('csv-parser');
-const yargs = require('yargs');
-const axios = require('axios');
+const fs = require('fs')
+const yargs = require('yargs')
+const axios = require('axios')
+const csv = require('csv-parser')
 
 const options = yargs
     .usage('Usage: -t <token>')
