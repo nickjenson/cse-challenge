@@ -1,16 +1,10 @@
 # cse-challenge
 This repository contains my script submission for [cse-challenge](https://github.com/KualiCo/cse-challenge).
-
-### Install
-      cd cse-challenge
-      npm install -g .
-      
-### Uninstall
-      npm uninstall -g cse-challenge
       
 ### Usage
-      cse-challenge --help
-      cse-challenge -t <token>
+      cd cse-challenge
+      npm run start -- --help
+      npm run start -- -t <token
 
 ## Submission Requirements
 - Create a GitHub repo and send along the link
