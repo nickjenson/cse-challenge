@@ -107,7 +107,6 @@ const buildPayload = (row, data) => {
 };
 
 const postData = async payload => {
-
     const response = await axios.post('/api/cm/courses', payload);
     console.log(response.data);
 };
